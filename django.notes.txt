@@ -1,0 +1,20 @@
+-para crear un projecto en django es necesario colocar django-admin startprojecct (colocas el nombre del proyecto)
+
+
+para ejecutar el proyecto debes escribir: python manage.py runserver
+
+-manage.py este archivo es para que podamos ejecutar algunos comandos de administracion de nuestro proyecto
+como ejecutar un servidor de desarrollo o coo copiar archivos de un lugar a otro o como optimizar nuestra aplicacion para
+produccion, lo usamos para jecutar el servidor ()python manage.py runserver 
+
+- si quieres parar la consola control + C, y si quieres limpiar la terminal o la consola colocas: cls
+- si precionas la tecla hacia arriba y hacia abajo puedes navegar entre multiples comandos
+
+- si ya tienes una aplicacion funcionando en el puerto 8000 y quieres que django ejecute en otro puerto solo debes colocaar 
+python manage.py runserver 3000  / en este caso 3000 es otro puerto que si quieres puedes colocar.
+
+- si escribes python manage.py help vas a poder observar comandos basicos
+
+- settings.py se usa para configurar todo el proyecto
+
+
