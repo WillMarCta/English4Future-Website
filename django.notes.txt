@@ -18,3 +18,16 @@ python manage.py runserver 3000  / en este caso 3000 es otro puerto que si quier
 - settings.py se usa para configurar todo el proyecto
 
 
+---------------------------
+
+ - APLICACION: es un conceptop que tiene django, cuando se crea un proyecto en django se crea una carpeta, 
+ django nos dice que cuando creemos nosotros tenemos que crear distintas carpetas que van a contener
+ distintas secciones de nuestro projecto, se pueden crear varias aplicaciones que forman parte del mismo proyecto.
+
+ para crear una aplicacion:manage.py startapp (aqui se coloca el nombre)
+
+ ----------------------------
+
+ en english4future/settings.py basicamente esta la configuracion global de cada proyecto
+ 
+
