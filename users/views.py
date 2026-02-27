@@ -1,7 +1,12 @@
-from django.shortcuts import render
+# to render the html page and to redirect the user to another page after they sign up
+from django.shortcuts import render, redirect
+# to create the form for the user to sign up
 from django.contrib.auth.forms import UserCreationForm
+# to create the user in the database when they sign up
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+# to create the cookie for the user when they sign up
+from django.contrib.auth import login
+from django.db import IntegrityError
 
 # Create your views here.
 
@@ -19,8 +24,9 @@ def user_signup(request):
                 user = User.objects.create_user(
                     username=request.POST['username'], password=request.POST['password1'])
                 user.save()
-                return HttpResponse("User created successfully")
-            except:
+                login(request, user)
+                return redirect('task')
+            except IntegrityError:
                 return render(request, 'signup.html', {
                     'form': UserCreationForm(),
                     "error": "Username already exists"
