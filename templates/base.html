@@ -18,22 +18,31 @@
 
 <body class="bg-white text-slate-900">
 
-    <nav class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
-        <div class="text-2xl font-extrabold text-blue-600 tracking-tighter">
-            E4F<span class="text-slate-400">.</span>
+
+    <nav class="flex justify-between items-center px-7 py-6 max-w-10xl mx-auto">
+        <div class="text-3xl font-extrabold text-blue-600 tracking-tighter">
+            E4F<span class="text-slate-400"></span>
         </div>
 
+        {% block navbar_links %}
         <div class="hidden md:flex gap-8 font-medium text-slate-600">
             <a href="/" class="hover:text-blue-600">Home</a>
             <a href="/task/" class="hover:text-blue-600">Tasks</a>
             <a href="/courses/" class="hover:text-blue-600">Courses</a>
         </div>
+        {% endblock %}
 
-        <div class="flex gap-4">
+        <div class="flex gap-4 items-center">
+            {% block auth_buttons %}
+            <a href="/signin/" class="text-slate-600 font-bold hover:text-blue-600 transition">
+                Sign in
+            </a>
+
             <a href="/signup/"
                 class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-100">
-                Únete ahora
+                Sign up
             </a>
+            {% endblock %}
         </div>
     </nav>
 

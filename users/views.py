@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 # to create the cookie for the user when they sign up
 from django.contrib.auth import login
 from django.db import IntegrityError
-
+from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
 
@@ -35,3 +35,8 @@ def user_signup(request):
             'form': UserCreationForm(),
             "error": "Password does not match"
         })
+
+
+def user_signin(request):
+    form = AuthenticationForm()
+    return render(request, 'signin.html', {'form': form})

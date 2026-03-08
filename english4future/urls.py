@@ -19,10 +19,14 @@ from django.urls import path
 from pages import views as pages_views
 from users import views as user_views
 from task import views as task_views
+from courses import views as courses_views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', pages_views.English4Future),
     path('signup/', user_views.user_signup, name='signup'),
-    path('task/', task_views.task, name='task')]
+    path('signin/', user_views.user_signin, name='signin'),
+    path('task/', task_views.task, name='task'),
+    path('courses/', courses_views.courses, name='courses'),
+]

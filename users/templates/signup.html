@@ -1,12 +1,73 @@
-<H1>signup</H1>
+<!DOCTYPE html>
+<html lang="es">
 
-{{error}}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp - E4F</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
 
-<form action="/signup/" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button>
-        SignUp
-    </button>
+<body class="bg-slate-50">
 
-</form>
+    <div class="max-w-md mx-auto mt-4 p-8 bg-white rounded-3xl shadow-xl border border-slate-100">
+
+        <h1 class="text-3xl font-extrabold text-blue-600 mb-6 text-center">SignUp</h1>
+
+        {% if error %}
+        <div class="bg-red-50 text-red-600 p-3 rounded-lg mb-4 text-sm font-medium">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="/signup/" method="post" class="space-y-4">
+            {% csrf_token %}
+
+            <div class="django-form-style text-slate-700">
+                {{ form.as_p }}
+            </div>
+
+            <button
+                class="w-full bg-blue-600 text-white py-3 rounded-full font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-100">
+                SignUp
+            </button>
+        </form>
+    </div>
+
+    <style>
+        .django-form-style p {
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .django-form-style input {
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+
+        .django-form-style .helptext {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        /* Estilo para las listas de requisitos de contraseña de Django */
+        .django-form-style ul {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            list-style: disc;
+            margin-left: 1.5rem;
+        }
+    </style>
+</body>
+
+</html>
