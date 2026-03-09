@@ -24,9 +24,11 @@ from courses import views as courses_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', pages_views.English4Future),
+    path('English4Future', pages_views.English4Future, name='English4Future'),
     path('signup/', user_views.user_signup, name='signup'),
     path('signin/', user_views.user_signin, name='signin'),
     path('task/', task_views.task, name='task'),
     path('courses/', courses_views.courses, name='courses'),
+    path('dashboard/', pages_views.dashboard, name='dashboard'),
+    path('logout/', user_views.signout, name='logout')
 ]
