@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'pages',
     'users',
     'task',
-    'courses'
+    'courses',
+    # 'dashboard'
 ]
 
 MIDDLEWARE = [
