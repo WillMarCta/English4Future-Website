@@ -25,6 +25,9 @@ def user_signup(request):
                 user = User.objects.create_user(
                     username=request.POST['username'], password=request.POST['password1'])
                 user.save()
+                user.profile.role = 'student'
+                user.profile.save()
+
                 login(request, user)
                 return redirect('dashboard')
             except IntegrityError:

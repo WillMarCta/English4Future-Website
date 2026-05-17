@@ -1,3 +1,79 @@
-<h1>COURSES</h1>
+{% extends 'base.html' %}
 
-<h1>HELOOOOOOOOOOOO</h1>
+{% block content %}
+
+<div class="max-w-6xl mx-auto mt-12 space-y-12">
+
+    <!-- BIENVENIDA -->
+    <div>
+        <h1 class="text-4xl font-extrabold text-slate-800 tracking-tight">
+            ¡Bienvenido al curso, {{ user.username }}!
+        </h1>
+        <p class="text-slate-600 mt-2">
+            Comienza con la Unidad 1. Las demás unidades se desbloquearán conforme avances.
+        </p>
+    </div>
+
+    <!-- PROGRESO DEL CURSO -->
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+        <h2 class="text-2xl font-bold text-blue-600 mb-4">Tu progreso</h2>
+
+        <div class="w-full bg-slate-200 rounded-full h-4">
+            <div class="bg-blue-600 h-4 rounded-full" style="width: 0%;"></div>
+        </div>
+
+        <p class="text-slate-600 mt-3">Aún no has comenzado. ¡Vamos a ello!</p>
+    </div>
+
+    <!-- UNIDADES DEL CURSO -->
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+        <h2 class="text-2xl font-bold text-green-600 mb-4">Unidades del curso</h2>
+
+        <ul class="space-y-3">
+
+            <!-- UNIDAD 1 DISPONIBLE -->
+            <li class="bg-slate-100 p-4 rounded-lg border-l-4 border-green-500 shadow-sm">
+                <div class="flex justify-between items-center">
+                    <span class="font-semibold">Unidad 1 — Introducción</span>
+                    <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                        Iniciar
+                    </button>
+                </div>
+            </li>
+
+            <!-- UNIDADES FUTURAS BLOQUEADAS -->
+            <li class="bg-slate-50 p-4 rounded-lg border-l-4 border-slate-400 shadow-sm opacity-60">
+                Unidad 2 — Disponible cuando completes la Unidad 1
+            </li>
+
+            <li class="bg-slate-50 p-4 rounded-lg border-l-4 border-slate-400 shadow-sm opacity-60">
+                Unidad 3 — Disponible cuando completes la Unidad 2
+            </li>
+
+            <li class="bg-slate-50 p-4 rounded-lg border-l-4 border-slate-400 shadow-sm opacity-60">
+                Unidad 4 — Disponible cuando completes la Unidad 3
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- MATERIALES INICIALES -->
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+        <h2 class="text-2xl font-bold text-purple-600 mb-4">Materiales iniciales</h2>
+
+        <ul class="space-y-3">
+            <li class="bg-slate-100 p-4 rounded-lg shadow-sm">📄 PDF — Bienvenida al curso</li>
+            <li class="bg-slate-100 p-4 rounded-lg shadow-sm">🎧 Audio — Pronunciación básica</li>
+        </ul>
+    </div>
+
+    <!-- MENSAJE MOTIVADOR -->
+    <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 shadow-sm">
+        <p class="text-blue-700 font-semibold">
+            Cada paso cuenta. ¡Comienza con la Unidad 1 y sigue avanzando!
+        </p>
+    </div>
+
+</div>
+
+{% endblock %}
