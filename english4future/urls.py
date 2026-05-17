@@ -20,6 +20,7 @@ from pages import views as pages_views
 from users import views as user_views
 from task import views as task_views
 from courses import views as courses_views
+from django.urls import include
 
 
 urlpatterns = [
@@ -27,7 +28,7 @@ urlpatterns = [
     path('English4Future', pages_views.English4Future, name='English4Future'),
     path('signup/', user_views.user_signup, name='signup'),
     path('signin/', user_views.user_signin, name='signin'),
-    path('task/', task_views.task, name='task'),
+    path('task/', include('task.urls')),
     path('courses/', courses_views.courses, name='courses'),
     path('dashboard/', pages_views.dashboard, name='dashboard'),
     path('logout/', user_views.signout, name='logout')

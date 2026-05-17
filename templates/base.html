@@ -27,7 +27,7 @@
         <div class="hidden md:flex gap-8 font-medium text-slate-600">
             <a href="{% url 'dashboard' %}" class="hover:text-blue-600">Home</a>
             {% if user.is_authenticated %}
-            <a href="{% url 'task' %}" class="hover:text-blue-600">Tasks</a>
+            <a href="{% url 'task_list' %}" class="hover:text-blue-600">Tasks</a>
             <a href="{% url 'courses' %}" class="hover:text-blue-600">Courses</a>
             {% endif %}
         </div>

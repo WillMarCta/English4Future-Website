@@ -1,3 +1,170 @@
-<h1>Task</h1>
+{% extends 'base.html' %}
 
-<h1>HELOOOOOOOOOOOO</h1>
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 60px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.10);
+        border: 1px solid #e2e8f0;
+    }
+
+    h1 {
+        text-align: center;
+        color: #1e293b;
+        margin-bottom: 10px;
+        font-size: 36px;
+        font-weight: 800;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #64748b;
+        margin-bottom: 30px;
+        font-size: 16px;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    li {
+        background: #f8fafc;
+        padding: 20px;
+        margin-bottom: 18px;
+        border-radius: 14px;
+        border-left: 6px solid #3b82f6;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        position: relative;
+    }
+
+    .task-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .task-desc {
+        color: #475569;
+        margin-top: 4px;
+    }
+
+    .info-box {
+        background: white;
+        border: 1px solid #e2e8f0;
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 12px;
+    }
+
+    .info-item {
+        color: #475569;
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .completed {
+        color: #16a34a;
+        font-weight: bold;
+    }
+
+    .pending {
+        color: #dc2626;
+        font-weight: bold;
+    }
+
+    /* ⭐ BOTÓN ABAJO DEL BLOQUE AZUL */
+    .complete-btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 16px;
+        background: #3b82f6;
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .complete-btn:hover {
+        background: #2563eb;
+    }
+</style>
+
+<div class="container">
+
+    <h1>Mis Tareas</h1>
+    <p class="subtitle">
+        Aquí encontrarás todas tus tareas asignadas, junto con su estado, fecha de entrega y detalles importantes.
+    </p>
+
+    {% if tasks %}
+        <ul>
+            {% for task in tasks %}
+                <li>
+
+                    <span class="task-title">📘 {{ task.title }}</span>
+
+                    <p class="task-desc">{{ task.description }}</p>
+
+                    <div class="info-box">
+
+                        <p class="info-item">
+                            <b>Estado:</b>
+                            {% if task.completed_by_student %}
+                                <span class="completed">✔ Completada por ti</span>
+                            {% else %}
+                                <span class="pending">✘ Pendiente</span>
+                            {% endif %}
+                        </p>
+
+                        <p class="info-item">
+                            <b>Creada el:</b> {{ task.created_at|date:"d/m/Y H:i" }}
+                        </p>
+
+                        {% if task.deadline %}
+                        <p class="info-item">
+                            <b>Fecha de entrega:</b> {{ task.deadline|date:"d/m/Y H:i" }}
+                        </p>
+                        {% endif %}
+
+                        {% if task.created_by %}
+                        <p class="info-item">
+                            <b>Creado por:</b> {{ task.created_by.username }}
+                        </p>
+                        {% endif %}
+
+                    </div>
+
+                    <!-- ⭐ BOTÓN EXACTAMENTE DONDE LO QUIERES: ABAJO DEL BLOQUE AZUL -->
+                    {% if not task.completed_by_student %}
+                        <a href="{% url 'complete_by_student' task.id %}" class="complete-btn">
+                            Marcar como completada
+                        </a>
+                    {% endif %}
+
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <p style="color:#475569; text-align:center; font-size:18px;">
+            No tienes tareas asignadas.
+        </p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

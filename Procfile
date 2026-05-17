@@ -1,0 +1,1 @@
+web: gunicorn english4future.wsgi:application
