@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # -----------------------------
 # 🔹 MODO DEBUG
 # -----------------------------
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 # -----------------------------
 # 🔹 SECRET KEY
