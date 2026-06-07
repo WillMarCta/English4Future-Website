@@ -33,3 +33,7 @@ urlpatterns = [
     path('dashboard/', pages_views.dashboard, name='dashboard'),
     path('logout/', user_views.signout, name='logout')
 ]
+
+admin.site.site_header = "English4Future Admin"
+admin.site.site_title = "English4Future Panel"
+admin.site.index_title = "Bienvenido al Panel de Control"
