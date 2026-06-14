@@ -28,7 +28,7 @@
             <a href="{% url 'dashboard' %}" class="hover:text-blue-600">Home</a>
             {% if user.is_authenticated %}
                 {% if user.is_staff %}
-                    <a href="#" class="hover:text-blue-600 font-bold text-blue-500">★ My Students</a>
+                    <a href="#" class="hover:text-blue-600 font-bold text-blue-500">My Students</a>
                     <a href="#" class="hover:text-blue-600">Grades</a>
                     <a href="{% url 'task_list' %}" class="hover:text-blue-600">Manage Tasks</a>
                 {% else %}
