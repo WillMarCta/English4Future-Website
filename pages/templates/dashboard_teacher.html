@@ -1,0 +1,23 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <a href="#" class="p-8 border-2 border-slate-100 rounded-xl hover:border-blue-600 hover:shadow-lg transition-all group">
+        <h3 class="text-xl font-bold group-hover:text-blue-600">📋 My Students</h3>
+        <p class="text-slate-500 mt-2">Ver lista de alumnos, sus niveles de inglés y guardar notas.</p>
+    </a>
+
+    <a href="{% url 'task_list' %}" class="p-8 border-2 border-slate-100 rounded-xl hover:border-blue-600 hover:shadow-lg transition-all group">
+        <h3 class="text-xl font-bold group-hover:text-blue-600">📝 Manage Tasks</h3>
+        <p class="text-slate-500 mt-2">Crear nuevas tareas o revisar las entregas pendientes.</p>
+    </a>
+
+    <div class="p-8 border-2 border-slate-100 rounded-xl bg-slate-50">
+        <h3 class="text-xl font-bold text-slate-700">📊 Quick Overview</h3>
+        <div class="mt-3 text-sm text-slate-600 space-y-1">
+            <p>• Active students: <span class="font-bold text-blue-600">Checking...</span></p>
+            <p>• Tasks to review: <span class="font-bold text-amber-600">Pending</span></p>
+        </div>
+    </div>
+</div>
+
+<div class="mt-10 p-4 bg-slate-100 rounded-lg border-l-4 border-slate-600">
+    <p class="text-slate-700 font-medium">💡 Pro-Tip: Puedes usar el panel de administración oscuro para agregar nuevos estudiantes de forma masiva.</p>
+</div>

@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -67,3 +68,12 @@ def signout(request):
     logout(request)  # Esto elimina la sesión del usuario
     # Lo mandamos de vuelta a la landing page
     return redirect('English4Future')
+
+
+def my_students(request):
+    if not request.user.is_staff:
+        from django.http import  HttpResponseForbidden
+        return HttpResponseForbidden("You are not authorized to view this page.")
+    #looking for all the students that are assigned to the teacher
+    students = User.objects.filter(is_staff=False, is_superuser=False)
+    return render(request, 'my_students.html', {"students": students})
