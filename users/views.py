@@ -9,6 +9,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.http import  HttpResponseForbidden
+from .models import Profile
 
 # Create your views here.
 
@@ -69,11 +71,31 @@ def signout(request):
     # Lo mandamos de vuelta a la landing page
     return redirect('English4Future')
 
+# --- FUNCIÓN 1: Lista Global ---
+@login_required
+def all_students(request):
+    return User.objects.filter(is_staff=False, is_superuser=False)
 
+
+# --- FUNCIÓN 2: Vista Principal ---
+@login_required
 def my_students(request):
-    if not request.user.is_staff:
-        from django.http import  HttpResponseForbidden
-        return HttpResponseForbidden("You are not authorized to view this page.")
-    #looking for all the students that are assigned to the teacher
-    students = User.objects.filter(is_staff=False, is_superuser=False)
-    return render(request, 'my_students.html', {"students": students})
+    # Conseguimos el rol y lo pasamos a minúsculas para evitar errores de escritura
+    user_role = getattr(request.user.profile, 'role', '').lower()
+    
+    # 1. Si es profesor (sea 'Teacher', 'teacher' o 'TEACHER')
+    if user_role == 'teacher':
+        mis_alumnos = Profile.objects.filter(teacher=request.user).select_related('user')
+        todos_los_alumnos = all_students(request)
+        
+        return render(request, 'my_students.html', {
+            "students": mis_alumnos,
+            "all_students": todos_los_alumnos
+        })
+    
+    # 2. Si no es profesor (así aseguramos que SIEMPRE responda un HttpResponse)
+    todos_los_alumnos = all_students(request)
+    return render(request, 'my_students.html', {
+        "students": [],
+        "all_students": todos_los_alumnos
+    })

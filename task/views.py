@@ -17,3 +17,5 @@ def complete_by_student(request, task_id):
     task.completed_by_student = True
     task.save()
     return redirect('task_list')
+
+

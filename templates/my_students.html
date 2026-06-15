@@ -1,53 +1,87 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<div class="max-w-6xl mx-auto mt-10 px-6">
-    <div class="flex justify-between items-center mb-8">
-        <div>
-            <h1 class="text-3xl font-extrabold text-slate-800 tracking-tight">My Students</h1>
-            <p class="text-slate-500 mt-1">List of registered students in English4Future.</p>
-        </div>
-        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">
-            Total: {{ estudiantes|length }}
-        </span>
-    </div>
+<div class="container mx-auto px-4 py-6">
     
-    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-        <table class="w-full text-left border-collapse">
-            <thead>
-                <tr class="bg-slate-50 text-slate-600 uppercase text-xs font-bold border-b border-slate-200">
-                    <th class="p-4">Username</th>
-                    <th class="p-4">Email</th>
-                    <th class="p-4">Status / Role</th>
-                    <th class="p-4 text-right">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100 text-sm text-slate-700">
-                {% for alumno in estudiantes %}
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="p-4 font-semibold text-slate-900">{{ alumno.username }}</td>
-                    <td class="p-4 text-slate-500">{{ alumno.email|default:"No email registered" }}</td>
-                    <td class="p-4">
-                        <span class="bg-green-100 text-green-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                            {{ alumno.profile.role|capfirst }}
-                        </span>
-                    </td>
-                    <td class="p-4 text-right">
-                        <a href="#" class="bg-blue-50 text-blue-600 hover:bg-blue-100 px-4 py-2 rounded-lg font-medium transition text-xs">
-                            View Grades
-                        </a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="4" class="p-12 text-center text-slate-400">
-                        <p class="text-lg font-medium">No students found</p>
-                        <p class="text-sm mt-1">Students will appear here once they sign up.</p>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="mb-10">
+        <div class="flex justify-between items-center mb-4">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800">My Students</h1>
+                <p class="text-sm text-slate-500">List of registered students in English4Future assigned to you.</p>
+            </div>
+            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Total: {{ students|length }}</span>
+        </div>
+
+        <div class="bg-white shadow rounded-lg overflow-hidden border border-slate-200">
+            <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+                <thead class="bg-slate-50 text-slate-700 font-semibold uppercase text-xs">
+                    <tr>
+                        <th class="px-6 py-3">Username</th>
+                        <th class="px-6 py-3">Email</th>
+                        <th class="px-6 py-3">Status / Role</th>
+                        <th class="px-6 py-3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 text-slate-600">
+                    {% for perfil in students %}
+                        <tr>
+                            <td class="px-6 py-4 font-medium text-slate-900">{{ perfil.user.username }}</td>
+                            <td class="px-6 py-4">{{ perfil.user.email }}</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 rounded bg-green-100 text-green-800 text-xs">My Student</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="text-slate-400">-</span>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="px-6 py-10 text-center text-slate-400">
+                                <p class="font-medium">No students found</p>
+                                <p class="text-xs">Students will appear here once they are assigned to you.</p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
+
+
+    <div>
+        <div class="flex justify-between items-center mb-4 border-t border-slate-200 pt-8">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800">All Students</h2>
+                <p class="text-sm text-slate-500">Global directory of all registered accounts in the platform.</p>
+            </div>
+            <span class="bg-slate-100 text-slate-800 text-xs font-semibold px-2.5 py-0.5 rounded">Global Total: {{ all_students|length }}</span>
+        </div>
+
+        <div class="bg-white shadow rounded-lg overflow-hidden border border-slate-200">
+            <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+                <thead class="bg-slate-50 text-slate-700 font-semibold uppercase text-xs">
+                    <tr>
+                        <th class="px-6 py-3">Username</th>
+                        <th class="px-6 py-3">Email</th>
+                        <th class="px-6 py-3">Role</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 text-slate-600">
+                    {% for usuario in all_students %}
+                        <tr>
+                            <td class="px-6 py-4 font-medium text-slate-900">{{ usuario.username }}</td>
+                            <td class="px-6 py-4">{{ usuario.email }}</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 rounded bg-slate-100 text-slate-700 text-xs">Student</span>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3" class="px-6 py-10 text-center text-slate-400">
+                                <p class="font-medium">No registered students in the system yet.</p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
-{% endblock %}
