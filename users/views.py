@@ -89,9 +89,17 @@ def add_student_to_my_students_list(request, student_id):
 # --- FUNCIÓN 2: Vista Principal ---
 @login_required
 def my_students(request):
-    # Conseguimos el rol y lo pasamos a minúsculas para evitar errores de escritura
-    user_role = getattr(request.user.profile, 'role', '').lower()
-    
+    if request.method == 'POST':
+        student_id = request.POST.get('student_id')
+        if student_id:
+            student_profile = Profile.objects.get(user_id=student_id)
+            student_profile.teacher = request.user 
+            student_profile.save()
+        return redirect('my_students')
+
+
+    user_role = request.user.profile.role.lower()  # Convertimos a minúsculas para evitar problemas de mayúsculas/minúsculas
+
     # 1. Si es profesor (sea 'Teacher', 'teacher' o 'TEACHER')
     if user_role == 'teacher':
         mis_alumnos = Profile.objects.filter(teacher=request.user).select_related('user')
