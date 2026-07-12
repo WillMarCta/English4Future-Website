@@ -32,7 +32,8 @@ urlpatterns = [
     path('courses/', courses_views.courses, name='courses'),
     path('dashboard/', pages_views.dashboard, name='dashboard'),
     path('logout/', user_views.signout, name='logout'),
-    path('students/', user_views.my_students, name='my_students')
+    path('students/', user_views.my_students, name='my_students'),
+    path('students/assign/<int:student_id>/', user_views.add_student_to_my_students_list, name='add_student_to_my_students_list'),
 ]
 
 admin.site.site_header = "English4Future Admin"

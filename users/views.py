@@ -71,10 +71,19 @@ def signout(request):
     # Lo mandamos de vuelta a la landing page
     return redirect('English4Future')
 
-# --- FUNCIÓN 1: Lista Global ---
+# --- : Lista Global ---
 @login_required
 def all_students(request):
     return User.objects.filter(is_staff=False, is_superuser=False)
+
+# --- assign students to a teacher ---
+@login_required
+def add_student_to_my_students_list(request, student_id):
+    student_profile = Profile.objects.get(user_id=student_id)
+    student_profile.teacher = request.user
+    student_profile.save()
+    return redirect('my_students')
+
 
 
 # --- FUNCIÓN 2: Vista Principal ---
