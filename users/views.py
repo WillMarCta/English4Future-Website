@@ -74,7 +74,11 @@ def signout(request):
 # --- : Lista Global ---
 @login_required
 def all_students(request):
-    return User.objects.filter(is_staff=False, is_superuser=False)
+    return User.objects.filter(
+        is_staff=False, 
+        is_superuser=False,
+        profile__role='student'
+    )
 
 # --- assign students to a teacher ---
 @login_required
@@ -95,6 +99,8 @@ def my_students(request):
             student_profile = Profile.objects.get(user_id=student_id)
             student_profile.teacher = request.user 
             student_profile.save()
+            print("Usuario actual:", request.user)
+            print("Estudiantes encontrados:", Profile.objects.filter(teacher=request.user).count())
         return redirect('my_students')
 
 
@@ -102,17 +108,17 @@ def my_students(request):
 
     # 1. Si es profesor (sea 'Teacher', 'teacher' o 'TEACHER')
     if user_role == 'teacher':
-        mis_alumnos = Profile.objects.filter(teacher=request.user).select_related('user')
-        todos_los_alumnos = all_students(request)
+        students = Profile.objects.filter(teacher=request.user).select_related('user')
+        global_student_list = all_students(request)
         
         return render(request, 'my_students.html', {
-            "students": mis_alumnos,
-            "all_students": todos_los_alumnos
+            "students": students,
+            "all_students": global_student_list
         })
     
     # 2. Si no es profesor (así aseguramos que SIEMPRE responda un HttpResponse)
-    todos_los_alumnos = all_students(request)
+    global_student_list = all_students(request)
     return render(request, 'my_students.html', {
         "students": [],
-        "all_students": todos_los_alumnos
+        "all_students": global_student_list
     })
