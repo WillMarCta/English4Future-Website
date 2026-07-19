@@ -21,6 +21,7 @@ from users import views as user_views
 from task import views as task_views
 from courses import views as courses_views
 from django.urls import include
+from teacher import views as teacher_views
 
 
 urlpatterns = [
@@ -32,8 +33,7 @@ urlpatterns = [
     path('courses/', courses_views.courses, name='courses'),
     path('dashboard/', pages_views.dashboard, name='dashboard'),
     path('logout/', user_views.signout, name='logout'),
-    path('students/', user_views.my_students, name='my_students'),
-    path('students/assign/<int:student_id>/', user_views.add_student_to_my_students_list, name='add_student_to_my_students_list'),
+    path('teacher/', include('teacher.urls')),
 ]
 
 admin.site.site_header = "English4Future Admin"
