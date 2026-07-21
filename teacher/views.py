@@ -9,7 +9,7 @@ from django.db import IntegrityError
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.http import  HttpResponseForbidden
-from .models import Profile
+from users.models import Profile
 
 # Create your views here.
 
@@ -36,7 +36,7 @@ def add_student_to_my_students_list(request, student_id):
 # --- FUNCIÓN 2: Vista Principal ---
 @login_required
 def my_students(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and 'student_id' in request.POST:
         student_id = request.POST.get('student_id')
         if student_id:
             student_profile = Profile.objects.get(user_id=student_id)

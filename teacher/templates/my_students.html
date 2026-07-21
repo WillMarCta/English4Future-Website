@@ -28,14 +28,13 @@
                     {% for perfil in students %}
                         <tr>
                             <td class="px-6 py-4 font-medium text-slate-900">{{ perfil.user.username }}</td>
-                            <td class="px-6 py-4">{{ perfil.user.email }}</td>
+                            <td class="px-6 py-4">{{ persfil.user.email }}</td>
                             <td class="px-6 py-4">
                                 <span class="px-2 py-1 rounded bg-green-100 text-green-800 text-xs"> Active </span>
                                 </td>
                             <td class="px-6 py-4">
-                                <from method="post">
+                                <form action="{% url 'remove_student' perfil.user.id %}" method="post">
                                     {% csrf_token %}
-                                    <input type="hidden" name="remove_student_id" value="{{ perfil.user.id }}">
                                     <button type="submit"
                                         class="bg-red-600 text-white px-3 py-2 rounded-lg text-xs font-semibold hover:bg-red-700">
                                         Remove
